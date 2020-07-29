@@ -46,9 +46,10 @@ router.post('/newUser', async (req, res) => {
           
             if (!emailRegex.test(req.body["email"])) {
                 return res.sendStatus(403);
+            } else if (!req.body["pass"]) {
+                return res.sendStatus(311);
             } else {
             collection.findOne( {"email": req.body["email"]}, function(err, result) {
-                
                 if(err || !result) { // If email does not match insert
                     collection.insertOne(req.body, (error, result) => {
                         if(error){
@@ -58,7 +59,6 @@ router.post('/newUser', async (req, res) => {
                     });
                   return res.sendStatus(200);
                 } else { // If email matchs error
-                    
                   return res.sendStatus(403);
                 }
               });
