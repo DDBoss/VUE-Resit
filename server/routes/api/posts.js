@@ -1,3 +1,17 @@
+/*
+Get Post
+Create User
+Email & Password Verification
+Log in
+Logout
+Retrieve Course Info
+Update
+Delete
+Search
+Filter
+Sorting
+*/
+
 const express = require('express');
 
 const MongoClient = require('mongodb').MongoClient;
