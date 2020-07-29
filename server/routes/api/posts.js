@@ -1,6 +1,4 @@
 /*
-Create User - Done awaiting below
-Email & Password Verification - email working
 Log in
 Logout
 Retrieve Course Info
@@ -69,7 +67,7 @@ router.post('/newUser', async (req, res) => {
 })
 //----------------------------------------------------------------------------------------------------------------------------
 //Add Post
-/*router.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     client.connect(err => {
         const collection = client.db('school_DB').collection('User');
         // perform actions on the collection object
@@ -82,7 +80,7 @@ router.post('/newUser', async (req, res) => {
         res.status(201).send();
         client.close;
     });
-})*/
+})
 //----------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------
