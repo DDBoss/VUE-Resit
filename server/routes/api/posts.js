@@ -1,7 +1,6 @@
 /*
-Get Post
-Create User
-Email & Password Verification
+Create User - Done awaiting below
+Email & Password Verification - email working
 Log in
 Logout
 Retrieve Course Info
@@ -23,7 +22,7 @@ const mongodb = require('mongodb');
 const router = express.Router();
 
 //----------------------------------------------------------------------------------------------------------------------------
-//Get Posts
+//Get
 router.get('/', async (req, res) => {
     client.connect(err => {
         const collection = client.db('school_DB').collection('User');
