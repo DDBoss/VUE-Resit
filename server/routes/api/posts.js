@@ -1,5 +1,4 @@
 /*
-Log in
 Logout
 Update
 Delete
@@ -19,7 +18,7 @@ const mongodb = require('mongodb');
 const router = express.Router();
 
 //----------------------------------------------------------------------------------------------------------------------------
-//Get
+//Get -->
 router.get('/', async (req, res) => {
     client.connect(err => {
         const collection = client.db('school_DB').collection('User');
@@ -59,7 +58,7 @@ router.post('/newUser', async (req, res) => {
                 }
               });
         }
-        //res.status(201).send();
+        res.status(201).send();
         client.close;
     });
 })
@@ -111,6 +110,20 @@ router.post('/Course', async (req, res) => {
     });
 })
 //----------------------------------------------------------------------------------------------------------------------------
+//Log-in
+router.post('/testing', async (req, res) => {
+    client.connect(err => {
+        const collection = client.db('school_DB').collection('User');
+            collection.findOne( {"email": req.body["email"], "pass": req.body["pass"]}, function(err, result) {
+                if(err || result) { // If email match 
+                    res.send(result.email, result.pass, res.createdAt);
+                } else {
+                  return res.sendStatus(433);
+                }
+              });
+        client.close;
+    });
+})
 //----------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------
@@ -134,14 +147,6 @@ async function loadPostsCollection() { //Change to User collection
     });
 
     return client.db('school_DB').collection('User');
-}
-
-async function loadCourseCollection() { 
-    const client = await mongodb.MongoClient.connect('mongodb+srv://testboy:A123456@cluster0.pkzla.mongodb.net/vue_express?retryWrites=true&w=majority', {
-        useNewUrlParser:true
-    });
-
-    return client.db('school_DB').collection('Course');
 }
 
 module.exports = router;
