@@ -1,7 +1,5 @@
 /*
-Logout
-Update
-Delete
+Logout -
 Search
 Filter
 Sorting
@@ -11,7 +9,7 @@ const express = require('express');
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://testboy:A123456@cluster0.pkzla.mongodb.net/vue_express?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const mongodb = require('mongodb');
 
@@ -125,28 +123,24 @@ router.post('/testing', async (req, res) => {
     });
 })
 //----------------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-//Delete Post
-router.delete('/:id', async (req, res) => {
-    const posts = await loadPostsCollection();
-    await posts.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
-    res.status(200).send();
-})
-
-async function loadPostsCollection() { //Change to User collection
-    const client = await mongodb.MongoClient.connect('mongodb+srv://testboy:A123456@cluster0.pkzla.mongodb.net/vue_express?retryWrites=true&w=majority', {
-        useNewUrlParser:true
+// Search
+router.get('/Search', async (req, res) => {
+    client.connect(err => {
+        const collection = client.db('school_DB').collection('Course');
+        // perform actions on the collection object
+        collection.find({ "topic": "Physics" }).toArray((error, documents) => {
+            if(error){
+                throw error;
+            }
+                res.send(documents);
+        });
+        client.close;
     });
-
-    return client.db('school_DB').collection('User');
-}
+})
+//----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------
 
 module.exports = router;
