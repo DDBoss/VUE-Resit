@@ -1,8 +1,6 @@
 /*
 Logout -
-Search
 Filter
-Sorting
 */
 
 const express = require('express');
